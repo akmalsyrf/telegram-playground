@@ -12,6 +12,18 @@ bot.getMe().then((user) => {
   console.error('Error getting bot information:', error);
 });
 
+// TODO: how to trigger inviting bot into group chat by system?
+const targetChatId = '-1001911139806'
+// bot.sendMessage(targetChatId, 'Halo! Saya baru saja bergabung ke dalam grup ini.')
+//     .then((message) => {
+//         // Proses selanjutnya setelah bot menjadi anggota grup
+//         console.log('Bot berhasil mengirim pesan ke grup.');
+//     })
+//     .catch((error) => {
+//         // Penanganan kesalahan lainnya
+//         console.error(error.message);
+//     });
+
 bot.on('message', (msg) => {
     try {
         const chatId = msg.chat.id;
@@ -43,15 +55,12 @@ bot.on('message', (msg) => {
       
           bot.getChatMember(chatId, user_id)
             .then((member) => {
-                console.log('member ', member)
-              if (member.status === 'member') {
-                bot.sendMessage(chatId, `Id ${user_id} mengikuti grup ini.`);
-              } else {
-                bot.sendMessage(chatId, `Id ${user_id} tidak mengikuti grup ini.`);
-              }
+              console.log('member ', member)
+              bot.sendMessage(chatId, `user ${member.user.username} mengikuti grup ini.`);
             })
             .catch((error) => {
-              bot.sendMessage(chatId, `Error: ${error}`);
+              console.error(`Error: ${error.message}`)
+              bot.sendMessage(chatId, `user tidak mengikuti grup ini.`);
             });
         }
     } catch (error) {
