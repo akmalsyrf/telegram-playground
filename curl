@@ -1,4 +1,0 @@
-curl --location 'https://api.telegram.org/bot7179975157:AAFl3nUdGfB3UbbTCv2-5VpRxuMGEgu9zbw/joinChat' \
---header 'Content-Type: application/json' \
---header 'Authorization: Bot 7179975157:AAFl3nUdGfB3UbbTCv2-5VpRxuMGEgu9zbw' \
---data '{"chat_id": 1001911139806}'
