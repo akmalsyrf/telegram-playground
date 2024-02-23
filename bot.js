@@ -26,8 +26,39 @@ const targetChatId = '-1001911139806'
 
 bot.on('message', (msg) => {
     try {
-        const chatId = msg.chat.id;
-        const text = msg.text;
+      const chatId = msg.chat.id
+      const chatName = msg.chat.title
+      const text = msg.text
+
+      bot.getChatAdministrators(chatId).then((admins) => {
+        admins.forEach((admin, i) => {
+          if (['administrator', 'creator'].includes(admin.status)) {
+            console.log('admin inside administrator ', admin)
+          } else {
+            console.log('admin outside administrator ', admin)
+          }
+
+          if (admin.custom_title) {
+            console.log(`custom title ${i} `, admin.custom_title)
+          }
+        })
+      })
+    
+      const username = msg.from.username
+      const userId = msg.from.id
+      const isBot = msg.from.is_bot
+
+      const newChatMember = msg.chat.new_chat_members
+      const leaveChatMember = msg.chat.left_chat_member
+    
+      console.log("chatId ", chatId)
+      console.log("chatName ", chatName)
+      console.log("text ", text)
+      console.log("username ", username)
+      console.log("userId ", userId)
+      console.log("isBot ", isBot)
+      console.log("newChatMember ", newChatMember)
+      console.log("leaveChatMember ", leaveChatMember)
       
         if (text === '/start') {
           bot.sendMessage(chatId, 'Welcome to the bot!');
